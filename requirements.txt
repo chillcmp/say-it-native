@@ -3,4 +3,6 @@ sqlalchemy~=2.0.40
 psycopg2-binary
 python-dotenv~=1.1.0
 pydantic~=2.11.1
-bcrypt~=3.2.0
+pyjwt~=1.5.3
+starlette~=0.46.1
+passlib~=1.7.4
