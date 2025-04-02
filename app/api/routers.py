@@ -1,7 +1,9 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from starlette.responses import JSONResponse
 
 from app.db.session import get_db
+from app.logger import logger
 from app.schemas.auth import LoginRequest
 from app.services.auth_service import register_user
 
@@ -17,4 +19,9 @@ def hello():
 
 @router.post("/register")
 def register(request: LoginRequest, db: Session = Depends(get_db)):
-    return register_user(request, db)
+    try:
+        response, status_code = register_user(request, db)
+        return JSONResponse(status_code=status_code, content=response)
+    except Exception as e:
+        logger.error(f"Registration failed: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
