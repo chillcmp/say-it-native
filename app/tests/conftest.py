@@ -23,3 +23,18 @@ def make_mock_db_session_user_exists():
         db.commit.return_value = None
         return db
     return _make
+
+
+@pytest.fixture
+def mock_pwd_context(monkeypatch):
+    pwd = MagicMock()
+    monkeypatch.setattr("app.services.auth_service.pwd_context", pwd)
+    return pwd
+
+
+@pytest.fixture
+def mock_jwt_token(monkeypatch):
+    jwt_token = MagicMock()
+    jwt_token.return_value = "mocked.jwt.token"
+    monkeypatch.setattr("app.services.auth_service._create_jwt_token", jwt_token)
+    return jwt_token
