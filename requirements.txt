@@ -3,6 +3,10 @@ sqlalchemy~=2.0.40
 psycopg2-binary
 python-dotenv~=1.1.0
 pydantic~=2.11.1
-pyjwt~=1.5.3
+pyjwt~=2.10.1
 starlette~=0.46.1
 passlib~=1.7.4
+pytest~=8.3.5
+transformers
+accelerate
+torch
